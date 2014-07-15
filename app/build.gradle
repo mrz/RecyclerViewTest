@@ -1,0 +1,35 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "20.0.0"
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
+    defaultConfig {
+        applicationId "com.mrz.example.recyclerviewtest"
+        minSdkVersion 15
+        targetSdkVersion 19
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:recyclerview-v7:+'
+    compile 'com.squareup.retrofit:retrofit:+'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:+'
+    compile 'com.squareup.okhttp:okhttp:+'
+    compile 'com.octo.android.robospice:robospice-retrofit:+'
+    compile 'com.squareup.picasso:picasso:+'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}

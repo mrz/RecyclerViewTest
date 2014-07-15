@@ -1,0 +1,10 @@
+.gradle
+/local.properties
+/.idea/workspace.xml
+.DS_Store
+/build
+/.idea/
+/RecyclerViewTest.iml
+/app/src/main/assets/secrets.properties
+/app/build/
+/app/app.iml
