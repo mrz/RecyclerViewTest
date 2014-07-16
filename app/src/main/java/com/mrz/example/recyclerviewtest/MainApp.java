@@ -26,8 +26,8 @@ public class MainApp extends Application {
             getSharedPreferences("com.mrz.example.recyclerviewtest", MODE_PRIVATE).edit().putString("clientSecret", props.getProperty("clientSecret")).commit();
         } catch (IOException e) {
             Log.e(tag, "Could not find secrets.properties in assets folder");
-            getSharedPreferences("com.mrz.example.recyclerviewtest", MODE_PRIVATE).edit().putString("clientID", "");
-            getSharedPreferences("com.mrz.example.recyclerviewtest", MODE_PRIVATE).edit().putString("clientSecret", "");
+            getSharedPreferences("com.mrz.example.recyclerviewtest", MODE_PRIVATE).edit().putString("clientID", "").commit();
+            getSharedPreferences("com.mrz.example.recyclerviewtest", MODE_PRIVATE).edit().putString("clientSecret", "").commit();
         }
     }
 }
