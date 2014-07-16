@@ -1,8 +1,5 @@
 package com.mrz.example.recyclerviewtest;
 
-import com.mrz.example.recyclerviewtest.model.GalleryImage;
-import com.squareup.picasso.Picasso;
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,7 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mrz.example.recyclerviewtest.model.GalleryImage;
 import com.mrz.example.recyclerviewtest.utils.Constants;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class GalleryImageAdapter extends RecyclerView.Adapter<GalleryImageAdapter.ViewHolder> {
@@ -26,11 +26,14 @@ public class GalleryImageAdapter extends RecyclerView.Adapter<GalleryImageAdapte
 
         private final TextView title;
 
+        private final TextView user;
+
         public ViewHolder(View view) {
             super(view);
 
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
             title = (TextView) view.findViewById(R.id.title);
+            user = (TextView) view.findViewById(R.id.user);
         }
     }
 
@@ -55,6 +58,7 @@ public class GalleryImageAdapter extends RecyclerView.Adapter<GalleryImageAdapte
 
         Picasso.with(mContext).load(thumbnailLink).into(viewHolder.thumbnail);
         viewHolder.title.setText(image.getTitle());
+        viewHolder.user.setText(image.getAccount_url() != null ? image.getAccount_url() : "Anonymous");
     }
 
     @Override
