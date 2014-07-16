@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mrz.example.recyclerviewtest.utils.Constants;
 import java.util.ArrayList;
 
 public class GalleryImageAdapter extends RecyclerView.Adapter<GalleryImageAdapter.ViewHolder> {
@@ -47,15 +48,13 @@ public class GalleryImageAdapter extends RecyclerView.Adapter<GalleryImageAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        String link = mDataSet.get(i).getLink();
-        String ptrn = "(http://i.imgur.com/\\w+)(\\.jpg|\\.png|\\.gif)";
-        if(link.matches(ptrn)) {
-            // We got a valid link
-            String thumbnailLink = link.replaceAll(ptrn, "$1s$2"); // Construct thumbnail link: https://api.imgur.com/models/image
+        GalleryImage image = mDataSet.get(i);
 
-            Picasso.with(mContext).load(thumbnailLink).into(viewHolder.thumbnail);
-            viewHolder.title.setText(mDataSet.get(i).getTitle());
-        }
+        String link = image.getLink();
+        String thumbnailLink = link.replaceAll(Constants.VALID_LINK_PTRN, "$1s$2$3"); // Construct thumbnail link: https://api.imgur.com/models/image
+
+        Picasso.with(mContext).load(thumbnailLink).into(viewHolder.thumbnail);
+        viewHolder.title.setText(image.getTitle());
     }
 
     @Override

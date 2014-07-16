@@ -2,6 +2,7 @@ package com.mrz.example.recyclerviewtest;
 
 import com.mrz.example.recyclerviewtest.model.GalleryImage;
 import com.mrz.example.recyclerviewtest.network.ImgurRandomImageSpiceRequest;
+import com.mrz.example.recyclerviewtest.utils.Constants;
 import com.mrz.example.recyclerviewtest.utils.GenerateTag;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
@@ -72,10 +73,21 @@ public class MainFragment extends Fragment {
         }
 
         @Override
-        public void onRequestSuccess(GalleryImage.List galleryImage) {
+        public void onRequestSuccess(GalleryImage.List galleryImages) {
+            GalleryImage.List data = new GalleryImage.List();
+
             Log.i(tag, "Success");
 
-            GalleryImageAdapter adapter = new GalleryImageAdapter(getActivity(), galleryImage);
+            // Filter out images with links not conforming the above pattern. While valid links,
+            // it simplifies rewriting the link for the thumbnail later on, and since we're dealing
+            // with random images anyway it's not like it matters if we lose a couple here.
+            for(GalleryImage image: galleryImages) {
+                if (image.getLink().matches(Constants.VALID_LINK_PTRN)) {
+                    data.add(image);
+                }
+            }
+
+            GalleryImageAdapter adapter = new GalleryImageAdapter(getActivity(), data);
             mRecyclerView.setAdapter(adapter);
         }
     }
